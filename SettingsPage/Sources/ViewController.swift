@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
     
@@ -17,7 +18,6 @@ class ViewController: UIViewController {
         let tableView = UITableView.init(frame: .zero, style: UITableView.Style.grouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -26,9 +26,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        title = "Настройки"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        self.view.backgroundColor = UIColor.white
+        self.navigationController?.title = "Настройки"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         setupHierarchy()
         setupLayout()
         
@@ -44,12 +44,9 @@ class ViewController: UIViewController {
     
     private func setupLayout() {
         
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor)
-        ])
+        tableView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalTo(view)
+        }
         
     }
 
